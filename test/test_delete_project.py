@@ -3,6 +3,9 @@ import random
 
 
 def test_delete_project(app):
+    username = app.config['webadmin']['username']
+    password = app.config['webadmin']['password']
+    app.session.login(username, password)
     if len(app.project.get_list_project()) == 0:
         app.project.create_project(Project(name="First project"))
     old_projects = app.project.get_list_project()
