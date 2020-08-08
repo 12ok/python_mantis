@@ -50,3 +50,16 @@ class ProjectHelper:
                 id = href[href.index('=') + 1:]
                 self.project_cache.append(Project(id=id, name=name, description=description))
         return list(self.project_cache)
+
+    def delete_project_by_name(self, name):
+        wd = self.app.wd
+        self.open_manage_page()
+        self.open_project_page()
+        self.select_project_by_name(name)
+        wd.find_element_by_css_selector("input[value='Delete Project']").click()
+        wd.find_element_by_css_selector("input[value='Delete Project']").click()
+        self.project_cache = None
+
+    def select_project_by_name(self, name):
+        wd = self.app.wd
+        wd.find_element_by_link_text(name).click()
